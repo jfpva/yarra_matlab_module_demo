@@ -1,9 +1,12 @@
-function yarra_matlab_module_demo_01( workDirPath, taskFileName, outputDirPath )
+function yarra_matlab_module_demo_01( workDirPath, taskFileName, outputDirPath, modeFilePath )
 %YARRA_MATLAB_MODULE_DEMO_01  Demonstrate Yarra module functionality.
 %
 %   YARRA_MATLAB_MODULE_DEMO_01( workDirPath, taskFileName, outputDirPath )
 %   executes task in workDirPath described by taskFileName and saves 
 %   results to outputDirPath.
+%
+%   YARRA_MATLAB_MODULE_DEMO_01( ..., modeFilePath ) reads reconstruction
+%   parameters from .mode file.
 
 %   jfpva (joshua.vanamerom@sickkids.ca)
 
@@ -18,6 +21,10 @@ taskParam = yarra_read_ini_file( taskFilePath );
 % Scan File
 scanFilePath = fullfile( workDirPath, taskParam.task.scanfile );
 assert( exist( scanFilePath, 'file' ) == 2, sprintf('File does not exist: %s',scanFilePath) )
+
+% Mode File
+assert( exist( modeFilePath, 'file' ) == 2, sprintf('File does not exist: %s',modeFilePath) )
+modeParam = yarra_read_ini_file( modeFilePath );
 
 
 %% Start Up
@@ -60,14 +67,34 @@ outputFileNamePrefix = strrep( twixFileName, 'meas_', '' );
 
 % Set Default Values for Reconstruction Parameters
 reconParam = struct;
-reconParam.sacParamValue = 0;  % default parameter value
+reconParam.sacParamValue = 0;           % parameter defined in SAC
+reconParam.modeParamNum = 0;            % parameter defined in .mode file
+reconParam.modeParamStr = 'null';       % parameter defined in .mode file
 
 % Overwrite the Defaults with Values from Task and Mode Files
 
-% Parameter Defined in Stand Alone Client Interface
+% sacParamValue
 if ( isfield( taskParam.task, 'paramvalue' ) )
     if ~isempty( taskParam.task.paramvalue )
         reconParam.sacParamValue = taskParam.task.paramvalue;
+    end
+end
+
+% modeParamNum
+if ( isfield( modeParam, 'matlabmoduledemo01' ) )
+    if ( isfield( modeParam.matlabmoduledemo01, 'modeparamnum' ) )
+        if ~isempty( modeParam.matlabmoduledemo01.modeparamnum )
+            reconParam.modeParamNum = modeParam.matlabmoduledemo01.modeparamnum;
+        end
+    end
+end
+
+% modeParamNum
+if ( isfield( modeParam, 'matlabmoduledemo01' ) )
+    if ( isfield( modeParam.matlabmoduledemo01, 'modeparamstr' ) )
+        if ~isempty( modeParam.matlabmoduledemo01.modeparamstr )
+            reconParam.modeParamStr = modeParam.matlabmoduledemo01.modeparamstr;
+        end
     end
 end
 
@@ -86,6 +113,8 @@ fprintf( 'TR               = %g ms\n',   TR );
 fprintf( 'pixelSpacing     = %.2f x %.2f mm\n', pixelSpacing(1), pixelSpacing(2) );
 fprintf( 'Reconstruction Parameters\n' )
 fprintf( 'SAC parameter    = %g\n',   reconParam.sacParamValue );
+fprintf( 'mode param num   = %g\n',   reconParam.modeParamNum );
+fprintf( 'mode param str   = %s\n',   reconParam.modeParamStr );
 fprintf( '-----------------------------------------------\n' );
 
 

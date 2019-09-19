@@ -22,7 +22,7 @@ ParamDescription=User-specified parameter.
 
 [Reconstruction]
 Bin=%hmb
-Args="-nodesktop -nosplash -r %hq try, moduleName='matlab_module_demo'; moduleDirPath=fullfile('%bu',moduleName); addpath(genpath(moduleDirPath)); yarra_matlab_module_demo_01('%rid/','%rit','%rod'); catch e, disp(e.message); end, quit; %hq"
+Args="-nodesktop -nosplash -r %hq try, moduleName='matlab_module_demo'; moduleDirPath=fullfile('%bu',moduleName); addpath(genpath(moduleDirPath)); yarra_matlab_module_demo_01('%rid/','%rit','%rod','%mc'); catch e, disp(e.message); end, quit; %hq"
 DisableMemKill=true
 
 [PostProcessing]
@@ -36,6 +36,10 @@ Args=%mc %td %vuid
 
 [Options]
 KeepRawdata=true
+
+[MatlabModuleDemo01]
+modeParamNum=3.1416
+modeParamStr=module parameter pi
 
 [DriveTransfer]
 TargetPath=/mnt/yarra

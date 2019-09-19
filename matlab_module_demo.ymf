@@ -1,7 +1,7 @@
 [YarraModule]
 Name=Matlab Module Demo
 Description=Demonstration of simple Yarra module using Matlab.
-Version=0.2
+Version=0.3
 Homepage=https://github.com/jfpva/yarra_matlab_module_demo
 Author=JFP van Amerom
 RequiresMatlab=true
