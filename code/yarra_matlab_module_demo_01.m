@@ -84,8 +84,21 @@ imData = phantom( 'Modified Shepp-Logan', twixObj.hdr.Dicom.lBaseResolution );
 fprintf( 'Saving results...\n' )
 
 dicomFileName = sprintf( '%s.dcm', outputFileNamePrefix );
+dicomFilePath = fullfile( outputDirPath, dicomFileName );
 
-dicomwrite( imData, fullfile( outputDirPath, dicomFileName ) );
+fprintf( '   %s\n', dicomFilePath );
+
+dicomwrite( imData, dicomFilePath );
+
+
+%% Save Data to .mat File
+
+matFileName = strcat( outputFileNamePrefix, '.mat' );
+matFilePath = fullfile( outputDirPath, matFileName );
+
+fprintf( '   %s\n', matFilePath );
+
+save( matFilePath, 'imData', 'pixelSpacing', '-v7.3' )
 
 
 %% Wrap Up
