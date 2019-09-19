@@ -1,0 +1,36 @@
+;##  YarraServer -- Reconstruction Mode Definition
+;##
+
+;## Information for Yarra client ##
+
+[ClientConfig]
+SortIndex=
+Name=Matlab Module Demo 01
+Tag=
+RequiresACC=FALSE
+RequiresAdjScans=FALSE
+ConfirmationMail=
+
+;## Definition of processing steps ##
+
+[PreProcessing]
+
+[Reconstruction]
+Bin=%hmb
+Args="-nodesktop -nosplash -r %hq try, moduleName='matlab_module_demo'; moduleDirPath=fullfile('%bu',moduleName); addpath(genpath(moduleDirPath)); yarra_matlab_module_demo_01('%rid/','%rit','%rod'); catch e, disp(e.message); end, quit; %hq"
+DisableMemKill=true
+
+[PostProcessing]
+
+[Transfer]
+Bin=%bd/DriveTransfer
+Args=%mc %td %vuid
+
+
+;## Module options ##
+
+[Options]
+KeepRawdata=true
+
+[DriveTransfer]
+TargetPath=/mnt/yarra
