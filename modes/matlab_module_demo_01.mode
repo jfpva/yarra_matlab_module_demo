@@ -10,6 +10,11 @@ Tag=
 RequiresACC=FALSE
 RequiresAdjScans=FALSE
 ConfirmationMail=
+ParamLabel=ClientReconParam
+ParamDefault=19
+ParamMin=1
+ParamMax=9999
+ParamDescription=User-specified parameter.
 
 ;## Definition of processing steps ##
 

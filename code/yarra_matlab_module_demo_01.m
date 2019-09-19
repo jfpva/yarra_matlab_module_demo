@@ -56,6 +56,22 @@ pixelSpacing = twixObj.hdr.Meas.PhaseFoV / twixObj.hdr.Meas.PhaseEncodingLines *
 outputFileNamePrefix = strrep( twixFileName, 'meas_', '' );
 
 
+%% Reconstruction Parameters
+
+% Set Default Values for Reconstruction Parameters
+reconParam = struct;
+reconParam.sacParamValue = 0;  % default parameter value
+
+% Overwrite the Defaults with Values from Task and Mode Files
+
+% Parameter Defined in Stand Alone Client Interface
+if ( isfield( taskParam.task, 'paramvalue' ) )
+    if ~isempty( taskParam.task.paramvalue )
+        reconParam.sacParamValue = taskParam.task.paramvalue;
+    end
+end
+
+
 %% Report Info
 
 fprintf( '-----------------------------------------------\n' );
@@ -68,6 +84,8 @@ end
 fprintf( 'Acquisition Parameters\n' )
 fprintf( 'TR               = %g ms\n',   TR );
 fprintf( 'pixelSpacing     = %.2f x %.2f mm\n', pixelSpacing(1), pixelSpacing(2) );
+fprintf( 'Reconstruction Parameters\n' )
+fprintf( 'SAC parameter    = %g\n',   reconParam.sacParamValue );
 fprintf( '-----------------------------------------------\n' );
 
 
