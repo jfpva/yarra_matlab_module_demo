@@ -157,9 +157,11 @@ fprintf( 'Saving results...\n' )
 dicomFileName = sprintf( '%s.dcm', outputFileNamePrefix );
 dicomFilePath = fullfile( outputDirPath, dicomFileName );
 
+dicomMetaData = twix_object_to_dicom_metadata( twixObj );
+
 fprintf( '   %s\n', dicomFilePath );
 
-dicomwrite( imData, dicomFilePath );
+dicomwrite( imData, dicomFilePath, dicomMetaData, 'WritePrivate', true );
 
 
 %% Save Data to .mat File

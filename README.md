@@ -19,7 +19,7 @@ zip -r yarra_matlab_module_demo.zip .
 
 Details of Yarra funtionality can be found at [yarraframework.com](http://yarraframework.com).
 
-### Spefifying Additional Files
+### Specifying Additional Files
 
 Additional files can be specified by the user in the SAC as of version 020b4.
 Alternatively, additional files can be manually specified in the .task file as follows:
