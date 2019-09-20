@@ -19,12 +19,23 @@ assert( exist( taskFilePath, 'file' ) == 2, sprintf('File does not exist: %s',ta
 taskParam = yarra_read_ini_file( taskFilePath );
 
 % Scan File
-scanFilePath = fullfile( workDirPath, taskParam.task.scanfile );
+scanFileName = taskParam.task.scanfile;
+scanFilePath = fullfile( workDirPath, scanFileName );
 assert( exist( scanFilePath, 'file' ) == 2, sprintf('File does not exist: %s',scanFilePath) )
 
 % Mode File
 assert( exist( modeFilePath, 'file' ) == 2, sprintf('File does not exist: %s',modeFilePath) )
 modeParam = yarra_read_ini_file( modeFilePath );
+
+% Additional/Adjustment Files
+if ( taskParam.task.adjustmentfilescount > 0 )
+    for iFile = 1:taskParam.task.adjustmentfilescount
+        adjFileName  = taskParam.adjustmentfiles.(sprintf('adjustmentfiles_%02i',iFile-1));
+        adjFilePath  = fullfile( workDirPath, adjFileName );
+        origFileName = taskParam.adjustmentfiles.(sprintf('originalname_%i',iFile-1));
+        assert( exist( adjFilePath, 'file' ) == 2, sprintf('File does not exist: %s (original filename: %s)',adjFilePath,origFileName) )
+    end
+end
 
 
 %% Start Up
@@ -39,7 +50,7 @@ reconStart = tic;
 
 %% Read Measurement Data
 
-fprintf( 'Loading %s...', scanFilePath );
+fprintf( 'Loading %s...\n', scanFileName );
 
 % Load File
 twixObj = mapVBVD( scanFilePath );
@@ -49,6 +60,19 @@ end
 
 % Extract K-Space Data
 kData = twixObj.image.unsorted();  
+
+
+%% Read Additional Data
+
+if ( taskParam.task.adjustmentfilescount > 0 )
+    for iFile = 1:taskParam.task.adjustmentfilescount
+        adjFileName  = taskParam.adjustmentfiles.(sprintf('adjustmentfiles_%02i',iFile-1));
+        adjFilePath  = fullfile( workDirPath, adjFileName );
+        origFileName = taskParam.adjustmentfiles.(sprintf('originalname_%i',iFile-1));
+        fprintf( 'Loading %s (originally: %s) ...\n', adjFileName, origFileName );
+        % TODO: add appropriate function calls to load data here
+    end
+end
 
 
 %% Derive Acquisition Parameters from Header
