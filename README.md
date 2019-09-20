@@ -2,6 +2,10 @@
 
 _Demonstration of simple Yarra module using Matlab._
 
+Other example modules, written by the developers of Yarra, can be found in the [YarraFramework team bitbucket collection](https://bitbucket.org/%7B651dd565-451c-4701-a251-5cd56ccb3cfc%7D/):
+* [YarraFramework/Modules/YarraModules-Examples](https://bitbucket.org/yarra-dev/yarramodules-examples/src/default/)
+* [YarraFramework/Modules/YarraModules-GRASP-Basic](https://bitbucket.org/yarra-dev/yarramodules-grasp-basic/src/default/)
+
 ## Installation
 
 This repository uses [git-submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), which will be missing when downloading from GitHub as a .zip.
@@ -21,7 +25,7 @@ Details of Yarra funtionality can be found at [yarraframework.com](http://yarraf
 
 ### Specifying Additional Files
 
-Additional files can be specified by the user in the SAC as of version 020b4.
+Additional files can be specified by the user in the SAC as of version [020b4](https://bitbucket.org/yarra-dev/yarraclient/commits/2954e2ccab2c282d28b42936360c755e25bc6c0d).
 Alternatively, additional files can be manually specified in the .task file as follows:
 ```
 [AdjustmentFiles]
