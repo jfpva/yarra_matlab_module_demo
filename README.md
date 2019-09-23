@@ -10,7 +10,7 @@ Other example modules, written by the developers of Yarra, can be found in the [
 
 This repository uses [git-submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), which will be missing when downloading from GitHub as a .zip.
 
-When cloning the main repository, use the `--recurse-submodules` flag to also clone the submodules. Tthe contents of the repository can then be bundled as a .zip file and upload to the YarraServer via the WebGUI.  
+When cloning the main repository, use the `--recurse-submodules` flag to also clone the submodules. The contents of the repository can then be bundled as a .zip file and upload to the YarraServer via the WebGUI.  
 
 E.g.,
 ```
@@ -22,6 +22,16 @@ zip -r yarra_matlab_module_demo.zip .
 ## Usage
 
 Details of Yarra funtionality can be found at [yarraframework.com](http://yarraframework.com).
+
+An attempt has been made to limit the functionality added to the demo with [each commit in this repository](https://github.com/jfpva/yarra_matlab_module_demo/commits/master).
+To view the changes made to the code associated with particular features, it can be useful to look at the diff of that commit with the previous commit.  
+E.g.,  
+[d0714fc](https://github.com/jfpva/yarra_matlab_module_demo/commit/d0714fc6c3fb1f9566b33c867bef86bdb09fe2d2) basic reconstruction  
+[4732e8a](https://github.com/jfpva/yarra_matlab_module_demo/commit/4732e8a814a05342838b0a27b3d22052e618dc07) add reconstruction parameters structure and read parmeter from SAC  
+[cecfb9d](https://github.com/jfpva/yarra_matlab_module_demo/commit/cecfb9d737752c5319c9dc85734aa6bab912c889) read reconstruction parameters from .mode file  
+[a0bab6a](https://github.com/jfpva/yarra_matlab_module_demo/commit/a0bab6ac515dadf470ad498e4825f64ffa305bcd) read additional files specified in .task file  
+[645038c](https://github.com/jfpva/yarra_matlab_module_demo/commit/645038c972737245e15fc9fd14342a3aa9e7ddd0) add metadata to dicom file output
+
 
 ### Specifying Additional Files
 
